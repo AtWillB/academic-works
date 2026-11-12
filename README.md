@@ -1,7 +1,7 @@
 # academic-works
 This repository is meant to demonstrate the collection of academic software-development and data visualization performed by William Byrne in his career so far.
 
-## Applying U-net to imagery of Saturn's Rings from Cassini's Imaging Science Subsystem (ISS)
+## Cataloging Spokes in Saturn's Rings seen from Cassini's Imaging Science Subsystem (ISS)
 
 ## Modeling the thermal effects of a porous surface layer on Enceladus's ice shell
 
