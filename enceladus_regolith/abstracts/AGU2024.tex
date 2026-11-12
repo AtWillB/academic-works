@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{authblk}
+\usepackage[style=numeric, sorting=none, backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+
+
+% determines the spacing and general formatting of each section in the document
+\makeatletter
+\renewcommand{\@maketitle}{%
+    \newpage
+    \null
+    \vskip 2em%
+    \let\footnote\thanks
+    \begin{center}%
+        {\LARGE \@title \par}%
+    \end{center}%
+        \vskip 1em%
+        {\large \noindent\begin{minipage}{\textwidth}\raggedright \@author\end{minipage}\par}%
+        \vskip 1em%
+    \begin{center}%
+        {\@date}%
+    \end{center}%
+    \par
+    \vskip 1.5em%
+}
+
+% Compact bibliography format: [N] Author et al., Year, ShortJournal.
+\DeclareNameFormat{familyonly}{%
+  \ifnumequal{\value{listcount}}{1}{%
+    \namepartfamily%
+    \ifnumgreater{\value{listtotal}}{1}{ et al.}{}%
+  }{}%
+}
+\DeclareBibliographyDriver{article}{%
+  \printnames[familyonly]{author}%
+  , \printfield{year}%
+  , \printfield{shortjournal}%
+  }
+\DeclareBibliographyDriver{inproceedings}{%
+  \printnames[familyonly]{author}%
+  , \printfield{year}%
+  , \printfield{shortjournal}%
+}
+\AtBeginBibliography{\setlength{\parskip}{0pt}}
+\setlength{\bibitemsep}{0pt}
+\setlength{\bibparsep}{0pt}
+
+\makeatother
+
+\title{Implications for Radar Attenuation of Thermally Insulating Porous Material on Enceladus}
+\renewcommand\Authands{, }
+\author[1]{Ana-Catalina Plesa}
+\author[1,2]{William Byrne}
+\author[1]{Hauke Hussmann}
+\author[1]{Tina Ruckriemen-Bez}
+\author[3]{Andreas Benedikter}
+
+
+\affil[1]{Institute of Space Research, German Aerospace Center (DLR), Berlin, Germany\\
+\href{mailto:William.Byrne@dlr.de}{William.Byrne@dlr.de}; \href{mailto:Ana.Plesa@dlr.de}{Ana.Plesa@dlr.de}; \href{mailto:tina.rueckriemen-bez@dlr.de}{tina.rueckriemen-bez@dlr.de}; \href{mailto:Hauke.Hussmann@dlr.de}{Hauke.Hussmann@dlr.de};}
+\affil[2]{University of Maryland, College Park, MD, USA\\
+\href{mailto:wbyrne@umd.edu}{wbyrne@umd.edu}}
+\affil[3]{Microwaves and Radar Institute, German Aerospace Center (DLR), Weßling, Germany\\
+\href{mailto:Andreas.Benedikter@dlr.de}{Andreas.Benedikter@dlr.de}}
+\date{28.11.2024:
+\href{https://studio.m-anage.com/agu/agu24/meetingapp.cgi/Paper/1594009}{View abstract on the AGU2024 website}}
+
+\begin{document}
+
+\maketitle
+
+\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\section*{Plain Language Summary}
+Saturn’s moon Enceladus is a prime target for planetary exploration and for the search of habitable conditions beyond Earth. Under its icy surface lies a possible sub-surface ocean, which was presumably sampled by active water jets by NASA’s CASSINI mission. Moreover, shallow brines may exist within the ice shell. The detection of subsurface water reservoirs (either the ocean or shallow brines) that can be achieved by radar is fundamental in characterizing Enceladus’ subsurface environment and its habitability potential. In this study we calculate the attenuation of radar signals through the ice shell in the presence of snow deposits that are believed to exist on the surface of Enceladus due to its water jets activity. We find that the ice-ocean interface may not be reached in regions covered by thick snow deposits that act as a blanket and keep the subsurface warm. However, in these regions, due to the high subsurface temperatures, shallow water bodies are likely to exist and could be detected by future radar observations.
+
+\newpage
+
+\section*{Abstract}
+
+Saturn’s moon Enceladus is a prime target for planetary exploration and for the search of habitable conditions beyond Earth. Beneath its icy surface, this small moon is thought to harbor a global ocean, presumably sampled by active water jets which have been observed at Enceladus’ south pole. Moreover, shallow brines may exist within the ice shell. The detection of subsurface water reservoirs (either the ocean or shallow brines) that can be achieved by radar is fundamental in characterizing Enceladus’ subsurface environment and its habitability potential.
+
+In this study we calculate the attenuation of radar signals through the ice shell in the presence of snow deposits that are believed to exist on the surface of Enceladus due to its water jets activity. We use numerical simulations to determine the effects of a porous layer on the two-way radar attenuation. We generate a range of thermal models, varying the ice shell and porous layer thickness, and the thermal conductivity of the porous material. We define a penetration depth as the depth at which the two-way attenuation reaches 100 dB, representing a detection threshold common to current ice-penetrating radar sounding instruments. We investigate a “low” loss scenario that considers an ice shell composed of pure water ice, and a “high” loss case that is characterized by a homogeneous mixture of water ice and chlorides in concentrations extrapolated from the particle composition of Enceladus’ plume.
+
+Our results show that the presence of a porous layer has a first-order effect on two-way radar attenuation. For regions covered by porous layers with thicknesses larger than 250 m and a thermal conductivity lower than 0.025 W/(mK) the two-way radar attenuation reaches a threshold value of 100 dB before reaching the ice-ocean interface in the low loss scenarios. In the high loss cases, for similar regolith layer thicknesses and thermal conductivity, the two-way attenuation remains below 100 dB for at most 48\% of the ice shell. Depending on the local ice shell thickness and properties of the snow deposits, as little as a few percent of the ice shell can be penetrated before the 100 dB limit is reached. We note, however, that the presence of a porous layer leads to high subsurface temperatures and promotes the formation of brines at shallow depth that can be detected by future radar measurements.
+
+
+\end{document}
