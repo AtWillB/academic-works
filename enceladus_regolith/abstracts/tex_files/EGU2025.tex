@@ -1,0 +1,94 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{authblk}
+\usepackage[style=numeric, sorting=none, backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+
+
+% determines the spacing and general formatting of each section in the document
+\makeatletter
+\renewcommand{\@maketitle}{%
+    \newpage
+    \null
+    \vskip 2em%
+    \let\footnote\thanks
+    \begin{center}%
+        {\LARGE \@title \par}%
+    \end{center}%
+        \vskip 1em%
+        {\large \noindent\begin{minipage}{\textwidth}\raggedright \@author\end{minipage}\par}%
+        \vskip 1em%
+    \begin{center}%
+        {\@date}%
+    \end{center}%
+    \par
+    \vskip 1.5em%
+}
+
+% Compact bibliography format: [N] Author et al., Year, ShortJournal.
+\DeclareNameFormat{familyonly}{%
+  \ifnumequal{\value{listcount}}{1}{%
+    \namepartfamily%
+    \ifnumgreater{\value{listtotal}}{1}{ et al.}{}%
+  }{}%
+}
+\DeclareBibliographyDriver{article}{%
+  \printnames[familyonly]{author}%
+  , \printfield{year}%
+  , \printfield{shortjournal}%
+  }
+\DeclareBibliographyDriver{inproceedings}{%
+  \printnames[familyonly]{author}%
+  , \printfield{year}%
+  , \printfield{shortjournal}%
+}
+\AtBeginBibliography{\setlength{\parskip}{0pt}}
+\setlength{\bibitemsep}{0pt}
+\setlength{\bibparsep}{0pt}
+
+\makeatother
+
+\title{Exploring Enceladus: The Science Case for Future Radar Sounder Measurements}
+\renewcommand\Authands{, }
+\author[1,2]{William Byrne}
+\author[1]{Hauke Hussmann}
+\author[1]{Ana-Catalina Plesa}
+\author[1]{Tina Ruckriemen-Bez}
+\author[3]{Andreas Benedikter}
+
+
+\affil[1]{Institute of Space Research, German Aerospace Center (DLR), Berlin, Germany\\
+\href{mailto:William.Byrne@dlr.de}{William.Byrne@dlr.de}; \href{mailto:Ana.Plesa@dlr.de}{Ana.Plesa@dlr.de}; \href{mailto:tina.rueckriemen-bez@dlr.de}{tina.rueckriemen-bez@dlr.de}; \href{mailto:Hauke.Hussmann@dlr.de}{Hauke.Hussmann@dlr.de};}
+\affil[2]{Freie Universit\"at Berlin, Berlin, Germany\\
+\href{mailto:byrnew02@zedat.fu-berlin.de}{byrnew02@zedat.fu-berlin.de}}
+\affil[3]{University of Münster, Institute of Planetology, Münster, Germany\\
+\href{mailto:tina.rueckriemen-bez@uni-muenster.de}{tina.rueckriemen-bez@uni-muenster.de}}
+\affil[4]{Microwaves and Radar Institute, German Aerospace Center (DLR), Weßling, Germany\\
+\href{mailto:Andreas.Benedikter@dlr.de}{Andreas.Benedikter@dlr.de}}
+\date{15.03.2024:\href{https://doi.org/10.5194/egusphere-egu25-21313}{View abstract on the EGU2025 website}}
+
+\begin{document}
+
+\maketitle
+
+\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\section*{Abstract}
+
+One of the major questions in planetary exploration concerns the habitability of icy moons in the outer Solar System. These bodies can harbor liquid water in substantial amounts over long time-scales, a necessary ingredient for habitable environments. Water on icy moons is located in global oceans in the subsurface, beneath a global ice shell,  and/or in local reservoirs within this ice shell. Moreover, some of the satellites, in particular Europa and Enceladus and perhaps also Triton and the largest Moons of Uranus, may provide the ‘right’ chemistry because of an ocean-silicate interface in their interior. The latter allows for rock-water interaction potentially bringing chemical compounds (CHNOPS) in contact with liquid water. Due to tidal friction, which can be an important heat source in the moons’ interiors, energy that drives chemical cycles would be available and sustained over time. 
+
+Among the icy moons, Enceladus is a high priority target for planetary explorations due to its high astrobiological potential. Based on the current knowledge from mission data and theoretical modeling, Enceladus provides compelling evidence for the presence of a global ocean, tidal energy as a heat source, hydrothermal processes at the ocean floor, current surface activity and a young surface, as well as possible existence of shallow water reservoirs and complex chemistry. In fact, Enceladus is recommended as the top priority target in ESA’s Voyage 2050 plan covering the science theme “Moons of the Giant Planets” \parencite{martins2024report}, with a subsurface radar sounder in the core payload of such a mission. 
+
+Radar sounders are the obvious means to detect and characterize subsurface water reservoirs on icy moons \parencite{benedikter2025distributed}. They can determine the ice-water interface and variations thereof, detect near-surface water reservoirs, study the connection of the ocean with the shallow subsurface/surface, and characterize the layering of the upper ice crust, e.g. snow, ice regolith, or compact ice that can help to understand the past evolution (intensity of jet activity and geological history).
+
+In this study we focus on the scientific goals of a radar sounder at Enceladus. We discuss the ice shell characteristics (thickness and variations, thermal structure, and layering) and their effects on the radar attenuation. We calculate the two-way radar attenuation on Enceladus considering a conductive ice shell covered by a porous thermally insulating surface layer. Our models show that for regions covered by a thick insulating porous surface layer (700 m, \parencite{martin2023}) a radar signal will not be able to reach the ice-ocean interface. However, for these same regions the high subsurface temperatures caused by a strong insulation due to the thick porous layer increase the likelihood that shallow brines are present \parencite{byrne2024dat}. Such brine reservoirs are fundamental to characterize habitable environments in the shallow subsurface, and the potential to directly access them with future measurements is much greater when compared to the accessibility of subsurface oceans \parencite{wolfenbarger2022}.
+
+\printbibliography[title={References}]
+
+\end{document}
