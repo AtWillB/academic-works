@@ -52,23 +52,27 @@
 
 \makeatother
 
-\title{The Consequences of an Icy Porous Layer on the Thermal State and Radar Attenuation of Enceladus' Ice Shell}
+\title{Constraining the Viscosity of Europa's Ice Shell from Eutectic Interfaces in Geodynamic Models}
 \renewcommand\Authands{, }
 \author[1,2]{William Byrne}
 \author[1]{Ana-Catalina Plesa}
-\author[1]{Tina Ruckriemen-Bez}
-\author[3]{Andreas Benedikter}
 \author[1]{Hauke Hussmann}
-
+\author[3]{Dustin Schroeder}
+\author[4]{Gregor Steinbr\"ugge}
+\author[5]{Natalie Wolfenbarger}
 
 \affil[1]{Institute of Space Research, German Aerospace Center (DLR), Berlin, Germany\\
-\href{mailto:William.Byrne@dlr.de}{William.Byrne@dlr.de}; \href{mailto:Ana.Plesa@dlr.de}{Ana.Plesa@dlr.de}; \href{mailto:tina.rueckriemen-bez@dlr.de}{tina.rueckriemen-bez@dlr.de}; \href{mailto:Hauke.Hussmann@dlr.de}{Hauke.Hussmann@dlr.de};}
-\affil[2]{University of Maryland, College Park, MD, USA\\
-\href{mailto:wbyrne@umd.edu}{wbyrne@umd.edu}}
-\affil[3]{Microwaves and Radar Institute, German Aerospace Center (DLR), Weßling, Germany\\
-\href{mailto:Andreas.Benedikter@dlr.de}{Andreas.Benedikter@dlr.de}}
-\date{03.07.2024:
-\href{https://doi.org/10.5194/epsc2024-694}{View abstract on the EPSC2024 website}}
+\href{mailto:William.Byrne@dlr.de}{William.Byrne@dlr.de}; \href{mailto:Ana.Plesa@dlr.de}{Ana.Plesa@dlr.de}; \href{mailto:Hauke.Hussmann@dlr.de}{Hauke.Hussmann@dlr.de}; \href{mailto:gael.cascioli@dlr.de}{gael.cascioli@dlr.de}}
+\affil[2]{Freie Universit\"at Berlin, Berlin, Germany\\
+\href{mailto:byrnew02@zedat.fu-berlin.de}{byrnew02@zedat.fu-berlin.de}; \href{mailto:frank.postberg@fu-berlin.de}{frank.postberg@fu-berlin.de}}
+\affil[3]{Department of Geophysics, Stanford University, Stanford, CA, USA\\
+\href{mailto:Dustin.M.Schroeder@stanford.edu}{Dustin.M.Schroeder@stanford.edu}}
+\affil[4]{Jet Propulsion Laboratory, California Institute of Technology, Pasadena, CA, USA\\
+\href{mailto:gregor.b.steinbruegge@nasa.jpl.gov}{gregor.b.steinbruegge@nasa.jpl.gov}}
+\affil[5]{Los Alamos National Laboratory, Los Alamos, NM, USA\\
+\href{mailto:wolfenbarger@lanl.gov}{wolfenbarger@lanl.gov}}
+\date{21.01.2026:\href{https://meetingorganizer.copernicus.org/EGU25/EGU25-652.html}{View abstract on the EGU2025 website}}
+
 
 \begin{document}
 
@@ -80,41 +84,11 @@
 
 \section*{Abstract}
 
-Saturn's moon, Enceladus is considered a priority target for future planetary missions due to its high astrobiological potential \parencite{choblet2021enceladus}. Water jets presumably originating from a subsurface ocean have been observed at the south pole of Enceladus by NASA’s Cassini mission \parencite{hansen2006enceladus}, and their analysis provides a direct window into the ocean composition \parencite{postberg2009sodium} that, in turn, can help to understand the nature and amount of impurities that may exist within the ice shell.
- 
-Enceladus’ jet activity generates a highly porous material that affects the thermal state of the ice shell. The thickness of that layer and its distribution are poorly constrained, but local thicknesses of up to 700 m have been reported from the analysis of pit chains on the surface of Enceladus \parencite{martin2023}. Such a thick porous layer can strongly attenuate the signal of radar sounders that have been proposed to investigate the Enceladus’ subsurface \parencite{soucek2023}.
+Jupiter’s moon Europa is one of the prime targets for planetary exploration due to its high astrobiological potential. Slightly smaller than Earth’s moon, Europa harbors a liquid water ocean beneath an ice shell. The thickness of Europa’s ice shell is poorly constrained and values of less than 1 km  to up to 90 km have been suggested in previous studies \parencite{billingsGreatThicknessDebate2005, vilellaTidallyHeatedConvection2020}. Ice-penetrating radars on NASA’s Europa Clipper (REASON, \parencite{blankenship2009radar}) and ESA’s JUICE (RIME, \parencite{bruzzoneRIMERadarIcy2013a}) missions aim to determine the thickness of Europa's ice shell. Recent studies have suggested that constraints on the thickness of Europa’s ice shell can be obtained through the detection of eutectic interfaces, defined as the depth where brine becomes thermodynamically stable in the ice shell \parencite{schroederConstrainingThicknessConductive2024}. In fact, previous studies have shown that the detection of eutectic horizons within an ice shell is likely easier than detecting the ice-ocean interface, given their shallower depths and therefore lower total signal attenuation \parencite{kalousovaRadarAttenuationEuropas2017,soucekRadarAttenuationEnceladus2023,byrneRadarAttenuationSubsurface2024}. The depth of the eutectic interfaces depends on the thermal state of the ice shell, which is closely linked to the ice shell viscosity and large-scale dynamics \parencite{kalousovaRadarAttenuationEuropas2017}. As suggested by previous authors \parencite{kalousovaRadarAttenuationEuropas2017, schroederConstrainingThicknessConductive2024}, detection of eutectic interfaces therefore represents a promising strategy to constrain the thermophysical properties of the ice shell through characterization of its convective pattern.
 
-Here, we use numerical simulations to determine the effects of a porous layer on the two-way radar attenuation. We generate a variety of steady-state one-dimensional thermal models based on proposed parameters for Enceladus’ ice shell thickness (5 - 35 km, \parencite{hemingway2019enceladus}), porous layer thickness (0 - 700 m \parencite{martin2023}) and its thermal conductivity (0.1 - 0.001 W/mK \parencite{seiferlin1996,ferrari2021}). We define a penetration depth, which is the depth at which the two-way attenuation reaches a 100 dB, a typical value for radar sounders on planetary missions\parencite{kalousova17}. We use two material models ("high" and "low" loss) to identify the impact of chemical impurities on attenuation\parencite{kalousova17}. While the “low” loss scenario considers an ice shell composed of pure water ice, the “high” loss case is characterized by a homogeneous mixture of water ice and chlorides in concentrations extrapolated from the particle composition of Enceladus’ plume \parencite{soucek2023}.
+In this study we use the geodynamic code GAIA \parencite{huttigImprovedFormulationIncompressible2013} to investigate the ice shell dynamics on Europa. We vary the ice shell thickness and ice shell viscosity that largely affect the convection pattern and in particular the number of hot upwellings and cold downwellings that can develop. In our models, the viscosity is temperature dependent and follows an Arrhenius law. We choose a reference value for the viscosity at the ice-ocean interface and vary this over several orders of magnitude between the different models. Once a simulation has reached a statistical (quasi-)steady state, we determine the eutectic pattern by identifying the depths of the eutectic temperature. We treat this sequence of eutectic depths as a signal and identify the peaks of each local maxima (or peak) in the signal. The number of local maxima in the simulation is used to estimate the global number of convection cells in the ice shell. 
 
-\begin{figure}[htbp]
-\noindent\includegraphics[width=\textwidth]{poster_figures/EPSC2024/fig1_epsc2024.png}
-\label{fig1}
-\end{figure}
-
-For a conductive ice shell, the temperature itself depends on the thickness of the ice shell, and to a first order on the presence of a porous layer. Due to its insulating effect caused by its low thermal conductivity, the porous layer can significantly impact the thermal profile within the ice shell, leading to a high thermal gradient near the surface. We can clearly observe in Figure 1 that the attenuation dramatically increases with increasing porous layer thickness. This can be again attributed to the insulating effect of the porous layer, an effect that becomes more pronounced with increasing porous layer thickness. 
-
-\begin{figure}[htbp]
-\noindent\includegraphics[width=\textwidth]{poster_figures/EPSC2024/fig2_epsc2024.png}
-\label{fig2}
-\end{figure}
-
-In addition to systematically testing parameter combinations, we use two ice shell thickness maps \parencite{hemingway2019enceladus} together with local thermal profiles to provide a global spatial distribution of potential penetration depths that could be achieved by radar measurements. The attenuation was calculated by treating each data point as a single temperature profile using the corresponding ice shell thickness at the respective location. We define a penetration depth, which is the depth at which the two-way attenuation reaches 100 dB. The relative penetration depth is the penetration depth divided by the total ice shell thickness of the respective scenario. 
-
-We constructed two distribution models for the porous layer under the assumption that the thickness of the porous layer varies only with latitude and: 1) exponentially decreases from a 700-m-thick layer at the south pole to 10-m-thick layer at the north pole of Enceladus, which we denote as the "exponential-global distribution" (see figure 2d) while 2) the porous layer is absent within the 5° of the south pole and then exponentially decreases from 255 m to 0 m at equator (see figure 2g), which we will call "exponential-hemispheric distribution". In all cases the conductivity of the porous layer is 0.025 Wm-1K-1. 
-
-In the low-loss attenuation maps (Figure 2d, e, and f), a majority of the surface has more than 90% relative penetration depth, while in all three high-loss scenarios, we observe a small band of 100% relative penetration depth roughly 5° in latitude away from the south pole. The thin ice shell at the south pole allows for the signal to reach the ice-ocean interface even in the presence of a thick porous layer. 
-
-\begin{figure}[htbp]
-\noindent\includegraphics[width=\textwidth]{poster_figures/EPSC2024/fig3_epsc2024.png}
-\label{fig3}
-\end{figure}
-
-In Figure 3, we calculate the two-way attenuation at the eutectic interfaces of ammonium chloride and ammonia \parencite{soucek2023} for the exponential-hemispheric distribution of the porous layer and assuming a thermal conductivity of the porous layer of 0.025 W/(mK). 
-
-Given the low eutectic temperature of NH3 (175.45 K), the two-way attenuation for the high-loss case (Figure 3b) is only ~5 dB on average. For the eutectic interface of NH4Cl (257.79 K), the two-way attenuation shows an average value of about 400 dB (Figure 3d). 
- 
-In conclusion, our results show that the presence of a porous layer has a first-order effect on the two-way radar attenuation. For regions covered by porous layers with thicknesses larger than 250 m and a thermal conductivity lower than 0.025 W/(mK) the two-way radar attenuation reaches a threshold value of 100 dB before reaching the ice-ocean interface in the low loss scenarios. In the high loss cases, for similar regolith layer thicknesses and thermal conductivity, the two-way attenuation remains below 100 dB for at most 48% of the ice shell. Depending on the local ice shell thickness and properties of the snow deposits, as little as a few percent of the ice shell can be penetrated before the 100 dB limit is reached. We note, however, that the presence of a porous layer leads to high subsurface temperatures and promotes the formation of brines at shallow depth that can be detected by future radar measurements.
-
+Our preliminary results show a close relation between the number of plumes that develop in the ice shell of Europa and the viscosity at the ice-ocean interface. By increasing the number and complexity of our simulations, we aim to derive so-called scaling laws that will relate the convection structure with the viscosity and thickness of Europa’s ice shell. This will provide a framework that will help to interpret the detection of eutectic interfaces in future radar measurements in the context of large-scale dynamics of the deep ice shell. 
 
 \printbibliography[title={References}]
 

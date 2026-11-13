@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{authblk}
+\usepackage[style=numeric, sorting=none, backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+
+
+% determines the spacing and general formatting of each section in the document
+\makeatletter
+\renewcommand{\@maketitle}{%
+    \newpage
+    \null
+    \vskip 2em%
+    \let\footnote\thanks
+    \begin{center}%
+        {\LARGE \@title \par}%
+    \end{center}%
+        \vskip 1em%
+        {\large \noindent\begin{minipage}{\textwidth}\raggedright \@author\end{minipage}\par}%
+        \vskip 1em%
+    \begin{center}%
+        {\@date}%
+    \end{center}%
+    \par
+    \vskip 1.5em%
+}
+
+% Compact bibliography format: [N] Author et al., Year, ShortJournal.
+\DeclareNameFormat{familyonly}{%
+  \ifnumequal{\value{listcount}}{1}{%
+    \namepartfamily%
+    \ifnumgreater{\value{listtotal}}{1}{ et al.}{}%
+  }{}%
+}
+\DeclareBibliographyDriver{article}{%
+  \printnames[familyonly]{author}%
+  , \printfield{year}%
+  , \printfield{shortjournal}%
+  }
+\DeclareBibliographyDriver{inproceedings}{%
+  \printnames[familyonly]{author}%
+  , \printfield{year}%
+  , \printfield{shortjournal}%
+}
+\AtBeginBibliography{\setlength{\parskip}{0pt}}
+\setlength{\bibitemsep}{0pt}
+\setlength{\bibparsep}{0pt}
+
+\makeatother
+
+\title{Constraining Geophysical Properties of Europa’s Ice Shell from the Depth to Eutectic Interfaces}
+\renewcommand\Authands{, }
+\author[1,2]{William Byrne}
+\author[1]{Ana-Catalina Plesa}
+\author[2]{Frank Postberg}
+\author[1]{Hauke Hussmann}
+\author[3]{Dustin Schroeder}
+\author[4]{Gregor Steinbr\"ugge}
+\author[5]{Natalie Wolfenbarger}
+\author[1]{Gael Cascioli}
+
+\affil[1]{Institute of Space Research, German Aerospace Center (DLR), Berlin, Germany\\
+\href{mailto:William.Byrne@dlr.de}{William.Byrne@dlr.de}; \href{mailto:Ana.Plesa@dlr.de}{Ana.Plesa@dlr.de}; \href{mailto:Hauke.Hussmann@dlr.de}{Hauke.Hussmann@dlr.de}; \href{mailto:gael.cascioli@dlr.de}{gael.cascioli@dlr.de}}
+\affil[2]{Freie Universit\"at Berlin, Berlin, Germany\\
+\href{mailto:byrnew02@zedat.fu-berlin.de}{byrnew02@zedat.fu-berlin.de}; \href{mailto:frank.postberg@fu-berlin.de}{frank.postberg@fu-berlin.de}}
+\affil[3]{Department of Geophysics, Stanford University, Stanford, CA, USA\\
+\href{mailto:Dustin.M.Schroeder@stanford.edu}{Dustin.M.Schroeder@stanford.edu}}
+\affil[4]{Jet Propulsion Laboratory, California Institute of Technology, Pasadena, CA, USA\\
+\href{mailto:gregor.b.steinbruegge@nasa.jpl.gov}{gregor.b.steinbruegge@nasa.jpl.gov}}
+\affil[5]{Los Alamos National Laboratory, Los Alamos, NM, USA\\
+\href{mailto:wolfenbarger@lanl.gov}{wolfenbarger@lanl.gov}}
+\date{02.07.2026:\href{https://meetingorganizer.copernicus.org/EPSC2026/EPSC2026-185.html}{View abstract on the EPSC2026 website}}
+\begin{document}
+
+\maketitle
+
+\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\section*{Plain Language Summary}
+Jupiter's moon, Europa, possesses a subsurface ocean beneath an ice shell with poorly constrained thickness (1–90 km). While ice-penetrating radars on NASA's Europa Clipper and ESA's JUICE missions aim to detect the ice-ocean interface, detecting shallower "eutectic interfaces"—where brines become stable—offers a promising avenue to constrain the shell's thermophysical and geodynamic properties.
+This study uses geodynamic models to simulate convection within Europa's ice shell by varying the ice shell thickness (20–60 km) and the reference viscosity across several orders of magnitude. The models incorporate mechanisms such as diffusion creep, dislocation creep, grain boundary sliding and basal slip. Once simulations reach a quasi-steady state, we analyze the resulting eutectic depth patterns.
+Preliminary results indicate that while global convective cell counts do not consistently correlate with viscosity, the average eutectic depth closely relates to the total ice shell depth. Our study aims to develop robust scaling laws linking these eutectic signal characteristics to key ice shell parameters like viscosity and thickness. Ultimately, this framework will aid in interpreting future radar detections of eutectic interfaces, providing deeper insights into large-scale dynamics of Europa's ice shell. Future work will focus on reconstructing ice shell patterns from sparse radar echoes to enhance signal resolution.
+
+\section*{Abstract}
+
+Europa is a prime target for planetary exploration due to its strong astrobiological potential. Slightly smaller than Earth’s moon, Europa harbors a liquid water ocean
+beneath an ice shell. The ice shell thickness is poorly constrained and values of less than
+1 km to up to 90 km have been suggested in previous studies employing a combination of thermal, impact, and mechanical models \cite{2,3}. Low ice thickness values were derived from mechanical models, which can generally only estimate the thickness of the brittle mechanical lid.
+Thermal and impact models, which are able to consider the entire ice shell, suggest higher end-member values.
+
+Ice-penetrating radars on NASA’s Europa-CLIPPER (REASON, \cite{4}) and ESA’s JUICE (RIME, \cite{5})
+missions aim to determine the thickness of Europa's ice shell. Recent studies have suggested that
+constraints on the thickness of Europa’s ice shell can be obtained through the detection of eutectic
+interfaces, defined as the depth where brines become thermodynamically stable \cite{6}.
+In fact, the detection of eutectic interfaces within an ice shell is likely easier than that of the ice-ocean interface, given their shallower depths \cite{7,8,9}. 
+Their depth depends on the thermal state of the ice shell, which is closely linked to the ice shell viscosity and large-scale internal dynamics \cite{7}. Thus, the detection of eutectic interfaces represents a promising strategy to constrain the thermophysical and geodynamic properties of the ice shell \cite{6,7}. 
+
+In this study we use the geodynamic code GAIA-v2 \cite{1} to investigate the dynamics within Europa's ice shell. GAIA-v2 is a finite volume fluid flow solver. GAIA numerically solves the conservation equations of mass, linear momentum, and thermal energy in order to determine the thermal state and fluid flow within the interior of planetary bodies. The code was originally developed to model solid-state convection in the interior of rocky bodies \cite{10,11,12}, but was recently adapted to treat large-scale dynamics in the ice shell of icy moons in the outer Solar System \cite{13}.
+
+Our models use a 2D cylindrical geometry, and we vary the ice shell thickness and the reference viscosity. 
+While free-slip is implemented as a condition on all boundaries, the top layer naturally arrives at a 
+no-slip boundary condition due to the strong temperature-dependent viscosity (which follows an Arrhenius law). 
+The reference viscosity, which is based on the viscosity at the ice-ocean interface, is varied over several orders of magnitude between the different models. We set the surface temperature to the temperature at the equator of Europa (110 K), and the temperature at the base of our model to the melting temperature of water-ice at the respective pressure. 
+
+Our models include a large parameter study in which we vary ice shell thickness between 20 and 60 kilometers, the reference viscosity between $10^{12}$ and $10^{15}$ Pascal seconds, and a single deformation mechanism, namely diffusion creep. Additionally, we test models that consider a temperature-dependent thermal conductivity, temperature-  and depth-dependent thermal expansivity, as well as more complex deformation mechanisms including dislocation creep, grain boundary sliding, and basal slip. 
+
+\newpage
+
+\IfFileExists{abstract_files/epsc_fig1.png}{
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\linewidth]{abstract_files/epsc2026_fig1.png}
+    \caption{End-member Zolotov and Shock eutectic interfaces (237 K) for simulations with 
+            20 km ice shell (left) and 60 km (right), varying reference viscosity by color. 
+            The dashed line represents the average eutectic depth (km) for the given eutectic interface.}
+    \label{fig:Figure 1}
+\end{figure}
+}{}
+
+\IfFileExists{abstract_files/epsc_fig2.png}{
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\linewidth]{abstract_files/epsc2026_fig2.png}
+    \caption{Ice shell thickness (D, km) plotted against average eutectic depth (km) for each simulation and for each eutectic temperature. A consistent positive relationship holds between ice shell thickness and average eutectic depth for all simulations and the two colder eutectic temperatures. The eutectic temperature for $MgSO_4$ is close to the pressure-dependent melting temperature of water ice (ice-ocean interface temperature), such that the average eutectic depth will consistently be equivalent to ice shell depth.}
+    \label{fig:Figure 2}
+\end{figure}
+}{}
+
+
+\newpage
+
+Once a simulation has reached a statistical (quasi-)steady state, we determine the eutectic pattern by identifying the depths of the eutectic temperature. We treat this sequence of eutectic depths as a signal (\autoref{fig:Figure 1}) and identify key characteristics of the interface like the number and location of
+upwellings and downwellings (peaks and troughs), average eutectic depth, and dominant signal
+frequency. Once these key characteristics are determined, we use them to develop scaling laws that link them to key geodynamic parameters.
+
+While our preliminary results have struggled to demonstrate consistent relationships between global convective cell count and viscosity, they do show a close relation between the average eutectic depth and the total ice shell depth (\autoref{fig:Figure 2}). By increasing the number and complexity of our simulations, we aim to fully develop these initial scaling laws which relate the convection structure
+with the viscosity and thickness of Europa’s ice shell. This will provide a framework that will help to interpret the detection of eutectic interfaces in future radar measurements in the context of large-scale dynamics of Europa's ice shell. 
+
+In future work, we will evaluate the ability to reconstruct patterns of the ice shell by using sparse radar echoes, similar to melt detection on
+terrestrial glaciers, and create a more realistic signal resolution based on terrestrial and non-terrestrial sounding studies.
+
+\printbibliography
+
+\end{document}
