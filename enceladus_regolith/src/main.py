@@ -38,7 +38,7 @@ def create_fig1_data():
     "klayer1"     : 0.025,
     "klayer1_str" : "0025",
     "k0": 651}
-    fig1_savepath =  f"../../figures/figure1/data"
+    fig1_savepath =  f"../data/figure1"
 
 
     sim["klayer2"] = 651/cpe.calc_TempIceOcean(sim["density_ice"], sim["d_ice"], sim["Ro"])
@@ -140,7 +140,7 @@ def create_fig1_data():
     return
 
 def plot_fig1():
-    root_filepath = "../../figures/figure1/data/temperature_profiles"
+    root_filepath = "../data/figure1/temperature_profiles"
 
     shell_thicknes_dict = load_group_temp_profiles(f"{root_filepath}/ice_shell_depth", "VarK_shell_depth", ['d5', 'd21', 'd35'])
     regolith_thickness_dict = load_group_temp_profiles(f"{root_filepath}/regolith_depth", "VarK_Regolith", ['0', '100', '400', "700"])
@@ -167,7 +167,7 @@ def plot_fig1():
     leg = ax[0, 0].legend(loc='lower left',title='d$_{porous\; layer}$ = 250 m,\n k$_{porous\; layer}$ = 0.025 W/(mK)',fontsize = 18, title_fontsize = 18)
     leg.get_title().set_multialignment('center')
 
-    txt_list = ['../../figures/figure1/data/temperature_profiles/ice_shell_depth/VarK_shell_depth_d5.txt','../../figures/figure1/data/temperature_profiles/ice_shell_depth/VarK_shell_depth_d21.txt','../../figures/figure1/data/temperature_profiles/ice_shell_depth/VarK_shell_depth_d35.txt']
+    txt_list = ['../data/figure1/temperature_profiles/ice_shell_depth/VarK_shell_depth_d5.txt','../data/figure1/temperature_profiles/ice_shell_depth/VarK_shell_depth_d21.txt','../data/figure1/temperature_profiles/ice_shell_depth/VarK_shell_depth_d35.txt']
     legend_labels = ['5 km', '21 km', '35 km']
     linewidths = [4, 7, 10]
     low_ice_df = tpu.mk_multi_attenuation_profile(txt_list, 0, 2, "low_loss", "Ice Shell Thickness", linewidths, legend_labels, ax[0, 1])
@@ -179,7 +179,7 @@ def plot_fig1():
     ax[0, 1].text(130, -0.35, s = 'Low Loss', fontweight = 'bold', fontsize = 35)
     ax[0, 1].set_yticklabels([])  # Empty list for tick labels
 
-    txt_list = ["../../figures/figure1/data/temperature_profiles/ice_shell_depth/VarK_shell_depth_d5.txt", "../../figures/figure1/data/temperature_profiles/ice_shell_depth/VarK_shell_depth_d21.txt", "../../figures/figure1/data/temperature_profiles/ice_shell_depth/VarK_shell_depth_d35.txt"]
+    txt_list = ["../data/figure1/temperature_profiles/ice_shell_depth/VarK_shell_depth_d5.txt", "../data/figure1/temperature_profiles/ice_shell_depth/VarK_shell_depth_d21.txt", "../data/figure1/temperature_profiles/ice_shell_depth/VarK_shell_depth_d35.txt"]
     legend_labels = ['5 km', '21 km', '35 km']
     linewidths = [4, 7, 10]
     high_ice_df = tpu.mk_multi_attenuation_profile(txt_list, 0, 2, "high_loss", "Ice Shell Thickness", linewidths, legend_labels, ax[0, 2])
@@ -207,7 +207,7 @@ def plot_fig1():
     leg = ax[1,0].legend(loc='lower left',title='d$_{ice}$ = 21 km,\n k$_{porous\; layer}$ = 0.025 W/(mK)',fontsize = 18, title_fontsize = 18)
     leg.get_title().set_multialignment('center')
 
-    txt_list = ['../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_0.txt', '../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_100.txt', '../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_400.txt', '../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_700.txt']
+    txt_list = ['../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_0.txt', '../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_100.txt', '../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_400.txt', '../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_700.txt']
     legend_labels = ['0 meters', '100 meters', '400 meters', '700 meters']
     linewidths = [3, 6, 9, 12]
     low_reg_df = tpu.mk_multi_attenuation_profile(txt_list, 0, 2, "low_loss",  "Porous Layer Thickness", linewidths, legend_labels, ax[1, 1])
@@ -217,7 +217,7 @@ def plot_fig1():
     ax[1, 1].set_yticklabels([])  # Empty list for tick labels
     ax[1, 1].set_xticklabels([])  # Empty list for tick labels
 
-    txt_list = ['../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_0.txt', '../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_100.txt', '../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_400.txt', '../../figures/figure1/data/temperature_profiles/regolith_depth/VarK_Regolith_700.txt']
+    txt_list = ['../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_0.txt', '../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_100.txt', '../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_400.txt', '../data/figure1/temperature_profiles/regolith_depth/VarK_Regolith_700.txt']
     legend_labels = ['0 meters', '100 meters', '400 meters', '700 meters']
     linewidths = [3, 6, 9, 12]
     high_reg_df = tpu.mk_multi_attenuation_profile(txt_list, 0, 2, "high_loss",  "Porous Layer Thickness", linewidths, legend_labels, ax[1, 2])
@@ -240,7 +240,7 @@ def plot_fig1():
     leg = ax[2,0].legend(loc='lower left',title='d$_{ice}$ = 21 km,\n d$_{porous\; layer}$ = 250 m',fontsize = 18, title_fontsize = 18)
     leg.get_title().set_multialignment('center')
 
-    txt_list = ['../../figures/figure1/data/temperature_profiles/regolith_conductivity/VarK_Conductivity_0001.txt', '../../figures/figure1/data/temperature_profiles/regolith_conductivity/VarK_Conductivity_0025.txt', '../../figures/figure1/data/temperature_profiles/regolith_conductivity/VarK_Conductivity_01.txt']
+    txt_list = ['../data/figure1/temperature_profiles/regolith_conductivity/VarK_Conductivity_0001.txt', '../data/figure1/temperature_profiles/regolith_conductivity/VarK_Conductivity_0025.txt', '../data/figure1/temperature_profiles/regolith_conductivity/VarK_Conductivity_01.txt']
     legend_labels = ['0.001 W/(mK)', '0.025 W/(mK)', '0.1 W/(mK)']
     linewidths = [5, 7.5, 10]
     low_cond_df = tpu.mk_multi_attenuation_profile(txt_list, 0, 2, "low_loss",  "Porous Layer Conductivity", linewidths, legend_labels, ax[2, 1])
@@ -249,7 +249,7 @@ def plot_fig1():
     ax[2, 1].grid()
     ax[2, 1].set_xlabel('Temperature [K]', fontsize = 28) # X label
 
-    txt_list = ['../../figures/figure1/data/temperature_profiles/regolith_conductivity/VarK_Conductivity_0001.txt', '../../figures/figure1/data/temperature_profiles/regolith_conductivity/VarK_Conductivity_0025.txt', '../../figures/figure1/data/temperature_profiles/regolith_conductivity/VarK_Conductivity_01.txt']
+    txt_list = ['../data/figure1/temperature_profiles/regolith_conductivity/VarK_Conductivity_0001.txt', '../data/figure1/temperature_profiles/regolith_conductivity/VarK_Conductivity_0025.txt', '../data/figure1/temperature_profiles/regolith_conductivity/VarK_Conductivity_01.txt']
     legend_labels = ['0.001 W/(mK)', '0.025 W/(mK)', '0.1 W/(mK)']
     linewidths = [5, 7.5, 10]
     high_cond_df = tpu.mk_multi_attenuation_profile(txt_list, 0, 2, "high_loss",  "Porous Layer Conductivity", linewidths, legend_labels, ax[2, 2])
@@ -272,7 +272,7 @@ def plot_fig1():
     #     frame = legend.get_frame()
     #     frame.set_alpha(0.3)
 
-    plt.savefig("../../figures/figure1/image(s)/fig1.png", format = "png", bbox_inches='tight')
+    plt.savefig("../data/figure1/image(s)/fig1.png", format = "png", bbox_inches='tight')
     plt.show()
 
     stats_df = pd.concat([tpu.calc_multiplot_stats(low_ice_df, 'low_loss'), 
@@ -300,7 +300,7 @@ def create_fig2_data():
     "klayer1_str" : "0025",
     "k0": 651}
     sim["klayer2"] = 651/cpe.calc_TempIceOcean(sim["density_ice"], sim["d_ice"], sim["Ro"])
-    fig2_savepath = "../../figures/figure2/data/"
+    fig2_savepath = "../data/figure2/"
 
 
 
@@ -355,8 +355,8 @@ def plot_fig2():
     fmt = ".3g"
     atten_limit = 100
     cmap = hu.custom_cmap()
-    temp_profiles_path = "../../figures/figure2/data/temperature_profiles_Ts_60/"
-    savepath  = '../../figures/figure2/data/attenuation_calculations/'
+    temp_profiles_path = "../data/figure2/temperature_profiles_Ts_60/"
+    savepath  = '../data/figure2/attenuation_calculations/'
     save = False
 
     heat_df_5_low = hu.mk_heatmap(5, 0, 2, "low_loss", temp_profiles_path, atten_limit, save, savepath)
@@ -404,7 +404,7 @@ def plot_fig2():
         ax.text(0.02, 0.98, label, transform=ax.transAxes + trans,
                 fontsize= 12, verticalalignment='top', fontfamily='serif', color = color,
                 bbox=dict(facecolor='none', edgecolor = "none", pad=3.0))
-    plt.savefig("../../figures/figure2/image(s)/fig2.png", format = "png", bbox_inches='tight')
+    plt.savefig("../data/figure2/image(s)/fig2.png", format = "png", bbox_inches='tight')
     plt.show()
 
 
@@ -422,10 +422,10 @@ def plot_fig2():
 def create_fig3_data():
     print("creating data for Figure 3")
 
-    fig3_savepath = "../../figures/figure3/data/attenuation_calculations_maps/"
+    fig3_savepath = "../data/figure3/attenuation_calculations_maps/"
 
     regolith_map_dict = dmu.create_regolith_maps()
-    shell_thickness_map = np.loadtxt("../../figures/figure3/data/ice_shell_depth_maps/Hemingway_depth_map_a.csv", delimiter= ',')
+    shell_thickness_map = np.loadtxt("../data/figure3/ice_shell_depth_maps/Hemingway_depth_map_a.csv", delimiter= ',')
     
     regolith_map_list = ['no', 'bc', 'exp']
     attenuation_model = ['low_loss', 'high_loss']
@@ -442,21 +442,21 @@ def create_fig3_data():
 
 def plot_fig3():
 
-    hemingway_a_depth_map = np.loadtxt("../../figures/figure3/data/ice_shell_depth_maps/Hemingway_depth_map_a.csv", delimiter= ',')
+    hemingway_a_depth_map = np.loadtxt("../data/figure3/ice_shell_depth_maps/Hemingway_depth_map_a.csv", delimiter= ',')
     regolith_depth_dict = dmu.create_regolith_maps()
     #low loss maps
-    filepath = "../../figures/figure3/data/attenuation_calculations_maps/low_loss/hemingway_map_A_bc_relative_low_loss.csv"
+    filepath = "../data/figure3/attenuation_calculations_maps/low_loss/hemingway_map_A_bc_relative_low_loss.csv"
     hemingway_low_a_bc_reg_depthpen =  np.loadtxt(filepath, delimiter= ",")
-    filepath = "../../figures/figure3/data/attenuation_calculations_maps/low_loss/hemingway_map_A_exp_relative_low_loss.csv"
+    filepath = "../data/figure3/attenuation_calculations_maps/low_loss/hemingway_map_A_exp_relative_low_loss.csv"
     hemingway_low_a_exp_reg_depthpen = np.loadtxt(filepath, delimiter= ",")
-    filepath = "../../figures/figure3/data/attenuation_calculations_maps/low_loss/hemingway_map_A_no_relative_low_loss.csv"
+    filepath = "../data/figure3/attenuation_calculations_maps/low_loss/hemingway_map_A_no_relative_low_loss.csv"
     hemingway_low_a_no_reg_depthpen =  np.loadtxt(filepath, delimiter= ",")
     # high loss maps
-    filepath = "../../figures/figure3/data/attenuation_calculations_maps/high_loss/hemingway_map_A_bc_relative_high_loss.csv"
+    filepath = "../data/figure3/attenuation_calculations_maps/high_loss/hemingway_map_A_bc_relative_high_loss.csv"
     hemingway_high_a_bc_reg_depthpen = np.loadtxt(filepath, delimiter= ",")
-    filepath = "../../figures/figure3/data/attenuation_calculations_maps/high_loss/hemingway_map_A_exp_relative_high_loss.csv"
+    filepath = "../data/figure3/attenuation_calculations_maps/high_loss/hemingway_map_A_exp_relative_high_loss.csv"
     hemingway_high_a_exp_reg_depthpen = np.loadtxt(filepath, delimiter= ",")
-    filepath = "../../figures/figure3/data/attenuation_calculations_maps/high_loss/hemingway_map_A_no_relative_high_loss.csv"
+    filepath = "../data/figure3/attenuation_calculations_maps/high_loss/hemingway_map_A_no_relative_high_loss.csv"
     hemingway_high_a_no_reg_depthpen = np.loadtxt(filepath, delimiter= ",")
 
     x, y = dmu.create_coords(181, 361)
@@ -537,7 +537,7 @@ def plot_fig3():
                 fontsize= label_fontsize+6, verticalalignment='top', fontfamily='serif', color = color,
                 bbox=dict(facecolor='none', edgecolor = "none", pad=3.0))
     
-    plt.savefig("../../figures/figure3/image(s)/fig3.png",format = "png", bbox_inches='tight')
+    plt.savefig("../data/figure3/image(s)/fig3.png",format = "png", bbox_inches='tight')
     plt.show()
 
     stats_df = pd.concat([ dmu.calc_depth_map_stats(hemingway_low_a_no_reg_depthpen, 'hemingway_map_a', 'no_regolith', 'low_loss'), 
@@ -553,8 +553,8 @@ def plot_fig3():
 
 def create_fig4_data():
     print("creating data for Figure 4")
-    folderpath = "../../figures/figure4/data/attenuation_calculations_map_a/"
-    hemingway_map_a = np.loadtxt("../../figures/figure4/data/ice_shell_depth_maps/Hemingway_depth_map_a.csv", delimiter= ',')
+    folderpath = "../data/figure4/attenuation_calculations_map_a/"
+    hemingway_map_a = np.loadtxt("../data/figure4/ice_shell_depth_maps/Hemingway_depth_map_a.csv", delimiter= ',')
 
 
     atten_models = ['low_loss', 'high_loss']
@@ -580,7 +580,7 @@ def create_fig4_data():
     return
 
 def plot_fig4():
-    filepath = "../../figures/figure4/data/attenuation_calculations_map_a/"
+    filepath = "../data/figure4/attenuation_calculations_map_a/"
 
     nh4cl_depth = np.loadtxt(filepath+"nh4cl_eutectic_depth_bc_eutectic_NH4CL_depth_no_loss.csv", delimiter= ",")/1000
     nh3_depth   = np.loadtxt(filepath+"nh3_eutectic_depth_bc_eutectic_NH3_depth_no_loss.csv", delimiter= ",")/1000
@@ -679,7 +679,7 @@ def plot_fig4():
                 fontsize= label_fontsize+6, verticalalignment='top', fontfamily='serif', color = color,
                 bbox=dict(facecolor='none', edgecolor = "none", pad=3.0))
     
-    plt.savefig("../../figures/figure4/image(s)/fig4.png", format = "png", bbox_inches='tight')
+    plt.savefig("../data/figure4/image(s)/fig4.png", format = "png", bbox_inches='tight')
     plt.show()
     
     stats_df = pd.concat([dmu.calc_depth_map_stats(nh3_low, 'hemingway_map_a', 'bestcase_regolith', 'low_loss_nh3_eutectic'), 
