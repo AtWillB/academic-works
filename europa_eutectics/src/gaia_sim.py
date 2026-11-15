@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-import gaia
+import gaia # propriatary library for simulations in DLR
 from .attenuation_interface import AttenuationInterface
 from .eutectic_interface import EutecticInterface
 import europa_eutectic.util.colors as colors
@@ -19,13 +19,22 @@ base_cmap = sns.color_palette("icy_moon_2", as_cmap = True) # My custom colormap
 
 
 def compute_stagnant_lid_depth(o, D_ref, velocity_threshold=0.01):
+    """Estimate stagnant-lid depth for each column of a GAIA output.
 
-    # Computes the stagnant lid depth for a simulation.
-    # Inputs:
-    # - o: GAIA simulation object containing velocity data at a certain time
-    # - velocity_threshold: the threshold factor to consider the lid depth (default 0.01)
-    # Returns:
-    # - lateral variation of stagnant lid depth for a specific time (in km)
+    Parameters
+    ----------
+    o : GAIA output
+        Simulation output containing grid and velocity data.
+    D_ref : float
+        Reference shell thickness in meters.
+    velocity_threshold : float
+        Fraction of the maximum velocity used as the threshold.
+
+    Returns
+    -------
+    ndarray
+        Estimated lid depth for each column, in kilometers.
+    """
 
     plot_stagnant_lid_depth = []
     depth = (o.grid.outerRadius - o.grid.shellRadius)
@@ -55,7 +64,37 @@ def compute_stagnant_lid_depth(o, D_ref, velocity_threshold=0.01):
 
 
 class GaiaSim:
-    def __init__(self, p, eutectics = [237.15, 252.05], attenuation_params = [(100, "Low Loss"), (100, "High Loss")]):# verify
+    """Load a GAIA simulation and derive its averaged fields and interfaces.
+
+    Parameters
+    ----------
+    p : pathlib.Path
+        Simulation directory; its name is used as the case ID.
+    eutectics : sequence of float
+        Eutectic temperatures in kelvin. Defaults to 237.15 and 252.05 K.
+    attenuation_params : sequence of (float, str)
+        Pairs of attenuation threshold in dB and model name (``"Low Loss"``
+        or ``"High Loss"``). Defaults to 100 dB for each model.
+
+    Attributes
+    ----------
+    avg_temp_2d : ndarray
+        Temperature field averaged over the final 10% of saved outputs, in K.
+    depth_2d : ndarray
+        Depth field in meters, measured from the outermost grid radius.
+    eutectics : list of EutecticInterface
+        One interface for each requested eutectic temperature, in order.
+    attenuation_interfaces : list of AttenuationInterface
+        One interface for each threshold and model pair, in input order.
+    times : ndarray
+        Simulation output times in millions of years.
+
+    Other averaged fields and summary statistics are available as attributes.
+    ``save`` stores the interface parameters, and ``load_from_json``
+    reconstructs the interfaces from those parameters.
+    """
+
+    def __init__(self, p, eutectics = [237.15, 252.05], attenuation_params = [(100, "Low Loss"), (100, "High Loss")]):
         ## load the sim and get the temp profile
         ## turn this into a function that gets the average temp profile for the last 10% of the sim. 
         ## then we can use this to get an average stagnant lid depth, and an average Nusselt number
@@ -112,6 +151,7 @@ class GaiaSim:
         
     
     def plot_eutectics(self, savepath = None):
+        """Plot eutectic interfaces and their means; optionally save to a directory."""
         df_list = []
         avg_df_list = []
 
@@ -187,6 +227,7 @@ class GaiaSim:
         )
 
     def load_dim_coefs(self, dim_coef):
+        """Populate and return dimensional scaling coefficients from simulation data."""
         dim_coef["scale_T"] = self.dim_data["Tb"] - self.dim_data["T0"] # k
         dim_coef["scale_C"] = self.dim_data["rho_mix"] - self.dim_data["rho_solid"] # km/m^3
         dim_coef["scale_D"] = self.dim_data["outer_radius"] - self.dim_data["inner_radius"] # m
@@ -196,6 +237,7 @@ class GaiaSim:
         return dim_coef
 
     def load_averages(self, last_10_percent_outputs):
+        """Compute averaged fields and summary statistics from GAIA outputs."""
         dim_coef = self.dim_coef
         dim_data = self.dim_data
 
@@ -280,6 +322,7 @@ class GaiaSim:
         
     
     def save(self, p):
+        """Save summary data and interface parameters as JSON in directory ``p``."""
         with open(p / f"{self.caseID}_data.json", "w") as f:
             json.dump({
                 "path": str(Path(self.path).resolve()),
@@ -318,6 +361,11 @@ class GaiaSim:
     
     @classmethod
     def load_from_json(cls, p):
+        """Load saved summary data and reconstruct interfaces from a JSON file.
+
+        The original simulation directory remains necessary to load the grid
+        and final GAIA output.
+        """
         p = Path(p)
 
         with open(p, "r") as f:
@@ -375,6 +423,11 @@ class GaiaSim:
         return sim
     
     def plot_field(self, field, field_name, levels, transparent=False, cmap = base_cmap, eutectics = None, savepath = None):
+        """Plot a gridded field, optionally overlaying eutectics or saving it.
+
+        ``eutectics`` enables overlays of this simulation's eutectic interfaces;
+        ``savepath`` is the directory for the output image.
+        """
 
         coords = np.array(self.last_output.grid.shellCoords)
         x = coords[:, :, 0]
@@ -428,19 +481,6 @@ class GaiaSim:
                 clean_mask[best_row_indices, cols] = 1
 
                 ax.contour(y, x, clean_mask, levels=[0.5], colors=color, linewidths=1)
-        if def_field:
-                ax.contour(x, y, field, levels=levels[1:-1], colors="black", linewidths=0.5)
-
-                from matplotlib.patches import Rectangle
-
-                ax.add_patch(Rectangle(
-                    (xmin, ymin), xmax - xmin, ymax - ymin,
-                    fill=False, edgecolor="black", linewidth=1.2
-                ))
-
-                for spine in ax.spines.values():
-                    spine.set_edgecolor("black")
-                    spine.set_linewidth(1.2)
 
         if transparent:
             fig.patch.set_alpha(0)

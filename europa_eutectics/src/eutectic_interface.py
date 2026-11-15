@@ -7,6 +7,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def first_eutectic_depth(depth, temp, eutectic_temp):
+    """Interpolate the first temperature crossing in the supplied array order.
+
+    ``depth`` and ``temp`` are corresponding one-dimensional arrays; the
+    result uses the same units as ``depth``. Returns NaN if no adjacent pair
+    crosses or touches ``eutectic_temp``.
+    """
     delta = temp - eutectic_temp
     crossing_idx = np.where(delta[:-1] * delta[1:] <= 0)[0]
     if crossing_idx.size == 0:
@@ -22,13 +28,30 @@ def first_eutectic_depth(depth, temp, eutectic_temp):
     return d0 + (eutectic_temp - t0) * (d1 - d0) / (t1 - t0)
 
 class EutecticInterface:
+    """Calculate the depth of a eutectic temperature across a simulation.
+
+    Parameters
+    ----------
+    sim : GaiaSim
+        Simulation providing temperature, depth, and grid data.
+    eutectic_temperature : float
+        Target temperature in kelvin.
+
+    Attributes
+    ----------
+    depth_to_eutectic : ndarray
+        Interpolated depth for each shell, in meters; NaN if there is no
+        crossing. The first crossing is selected from the ice-ocean interface
+        toward the surface.
+    distance_along_equator : ndarray
+        Distance along the equator for each shell, in meters.
+    avg_depth_to_eutectic : float
+        Mean eutectic depth, excluding NaNs, in meters.
+    """
+
     def __init__(self, sim, eutectic_temperature):
         self.eutectic_temperature = eutectic_temperature
 
-        # for each depth column, find the first depth (from the ice-ocean interface)
-        # where the temperature crosses the eutectic temperature
-        # do this for every shell
-        # do linear interpolation to find the depth of the eutectic interface between two depth points
         self.depth_to_eutectic = np.array([
             first_eutectic_depth(sim.depth_2d[:, j], sim.avg_temp_2d[:, j], eutectic_temperature)
             for j in range(sim.avg_temp_2d.shape[1])
@@ -44,6 +67,7 @@ class EutecticInterface:
 
 
     def plot_interface(self, savefile_path=None):
+        """Plot eutectic depth against distance; optionally save to a file."""
         plt.figure(figsize=(10, 6))
 
         g = sns.lineplot(x=self.distance_along_equator/1000, y=self.depth_to_eutectic/1000)

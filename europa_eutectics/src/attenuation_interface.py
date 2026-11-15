@@ -10,11 +10,19 @@ import matplotlib.pyplot as plt
 # Kalousova et al 2016, 10.1002/2016JE005110
 
 def calc_electrical_conductivity(temp, pure_ice = True):
-    """
-    calc_electrical_conductivity calculates the eletrical conductivity for ice at a given temeprature with a given concentration of cloride
+    """Calculate ice electrical conductivity using Kalousova et al. (2016).
 
-    param temp: temperature at a given layer (in kelvin)
-    param pure_ice: boolean indicating if the ice is pure or not
+    Parameters
+    ----------
+    temp : float or ndarray
+        Temperature in kelvin.
+    pure_ice : bool
+        If true, use pure ice; otherwise include acid and salt contributions.
+
+    Returns
+    -------
+    float or ndarray
+        Electrical conductivity in microSiemens per meter.
     """
     final_cond = 0
 
@@ -46,10 +54,16 @@ def calc_electrical_conductivity(temp, pure_ice = True):
     return final_cond
 
 def first_attenuation_limit(depth, attenuation, attenuation_limit):
+    """Interpolate the first threshold crossing in the supplied array order.
+
+    ``depth``(m) and ``attenuation`` (dB) are corresponding one-dimensional arrays;
+    the result uses the same units as ``depth``. Returns NaN if no adjacent
+    pair crosses or touches ``attenuation_limit``.
+    """
     delta = attenuation - attenuation_limit
     crossing_idx = np.where(delta[:-1] * delta[1:] <= 0)[0]
     if crossing_idx.size == 0:
-        return np.nan # triggered when you never reach 100 dB
+        return np.nan
 
     i = crossing_idx[0]
     d0, d1 = depth[i], depth[i + 1]
@@ -61,14 +75,39 @@ def first_attenuation_limit(depth, attenuation, attenuation_limit):
     return d0 + (attenuation_limit - a0) * (d1 - d0) / (a1 - a0) 
 
 class AttenuationInterface:
+    """Calculate radar attenuation and its threshold depth for a simulation.
+
+    Parameters
+    ----------
+    sim : GaiaSim
+        Simulation providing temperature, depth, and grid data. Depth spacing
+        must be uniform.
+    attenuation_limit : float
+        Two-way attenuation threshold in dB.
+    attenuation_model : {"Low Loss", "High Loss"}
+        Conductivity model used for the calculation.
+
+    Attributes
+    ----------
+    attenuation_2d : ndarray
+        Cumulative two-way attenuation by depth and shell, in dB.
+    depth_to_attenuation_limit : ndarray
+        Interpolated threshold depth for each shell, in meters; NaN if there
+        is no crossing.
+    distance_along_equator : ndarray
+        Distance along the equator for each shell, in meters.
+    avg_depth_to_attenuation_limit : float
+        Mean threshold depth, excluding NaNs, in meters.
+
+    Raises
+    ------
+    ValueError
+        If the attenuation model is invalid or depth spacing is not uniform.
+    """
+
     def __init__(self, sim, attenuation_limit, attenuation_model):
         self.attenuation_limit = attenuation_limit
         self.attenuation_model = attenuation_model
-
-        # for each depth column, find the first depth (from the ice-ocean interface)
-        # where the temperature crosses the eutectic temperature
-        # do this for every shell
-        # do linear interpolation to find the depth of the eutectic interface between two depth points
 
         pure_ice = None
         if attenuation_model == "Low Loss":
@@ -123,6 +162,7 @@ class AttenuationInterface:
 
 
     def plot_interface(self):
+        """Display threshold depth against distance along the equator."""
         plt.figure(figsize=(10, 6))
         g = sns.lineplot(x=self.distance_along_equator/1000, y=self.depth_to_attenuation_limit/1000)
         g.set(
