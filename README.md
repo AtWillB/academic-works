@@ -47,5 +47,33 @@ The examples within this repository include the following works:
 
 ## Assessing the Lateral Detectability of Eutectic Interfaces within Europa's Ice Shell
 
+1. Simulations with a 2D spherical annulus geometry are run until they reach a true or quasi steady-state, determined by RMS Velocity
+   
+2. Simulations are read into the **src**/gaia_sim.py class, which performs 
+   1. time-averaging of relevant fields (mostly temp field) over last 10% of time steps
+   2. Using the time-averaged T field, calculate relevant isothermal depths to 237.15 K and 252.05 K
+   3. calculates the depths that you reach 100 dB of attenuation (using either low or high loss model)
+   4. Eutectic interface detection (lateral detectability %) is then calcualted for each pair of eutectic interface and attenuation model 
+   
+3. Calculated fields and assocaited metadata is saved into a .json object
+
+4. Calculations relevant to figure generation are stored in tabular format (*full_study.csv)
+
+5. .csv data is read in by figure[1-5]*.ipynb notebooks to generate figure components
+
+6. Individual componets are compiled in Inkscape (free photoshop) and then saved as .pdf
+
+
+#### Notes
+- Repository commit history is viewable at https://github.com/AtWillB/gaia_eutectic_constrain
+- Data organizational preference per-simulation rather than per figure
+- README.md file for simualtion metadata and for tabular .csv content
 
 ## A Practical Guide to Git for Academic Software Development
+This was the very first work I took to a conference that was not officially supervised, and was entirely my own idea. Source control is not widely adopted in planetary science software development. So I created a poster explaining the value of git at three scales of development
+
+- As an individual academic software developer
+- As a small group (2-5) of developers working on the same repository
+- Multiple teams of developers operating simulaneously on the same project. 
+
+This work was displayed at the 2026 Europlanet Science Conference (EPSC2026) in poster form
