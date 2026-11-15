@@ -41,6 +41,7 @@ The examples within this repository include the following works:
    3. Relative penetration depth maps taking global ice shell thickness estimates from Hemingway & Mital et. al. 2019 (fig3 & fig4)
 
 #### Notes
+- Original repository is owned by DLR, and therefore repository commit history is not viewable
 - The **data**/ folder is structred by figure. 
 - Under each data/figure*/ sub-folder, there is a unique figure*_README.txt documenting the tablular structure used for both attenuation calculations and temperature profiles. 
 
