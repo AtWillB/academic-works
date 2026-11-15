@@ -1,5 +1,5 @@
 # academic-works
-This repository is meant to demonstrate the collection of academic software-development and data visualization curated by William Byrne for published work in his career thus far.
+This repository is meant to demonstrate the collection of academic software-development and data visualization curated by William Byrne (as of 2026) for published work in his career thus far.
 
 The following work is generally structred as follows:
 ```text
@@ -27,7 +27,9 @@ Where the **abstract**/ folder contains all abstracts related to the highest-imp
 
 The examples within this repository include the following works:
 ## Modeling the Thermal Effects of Surface Regolith on Enceladus's Ice Shell
+This work is contained within enceladus_regolith/
 
+The data pipeline for this project was as follows:
 1. 1D temperature profiles of Enceladus's ice shell generated with varying ice shell depths, regolith depths, and regolith thermal conductivity by **src**/conductive_profile_equations.py/calc_ConductiveTempProfileVarkT.py
    
 2. Temperature profiles are saved in *.txt files under **data**/
@@ -40,13 +42,17 @@ The examples within this repository include the following works:
    2. Heatmaps showing each simulation's relative penetration depth to 100 dB (fig2) 
    3. Relative penetration depth maps taking global ice shell thickness estimates from Hemingway & Mital et. al. 2019 (fig3 & fig4)
 
+
 #### Notes
 - Original repository is owned by DLR, and therefore repository commit history is not viewable
 - The **data**/ folder is structred by figure. 
 - Under each data/figure*/ sub-folder, there is a unique figure*_README.txt documenting the tablular structure used for both attenuation calculations and temperature profiles. 
 
 ## Assessing the Lateral Detectability of Eutectic Interfaces within Europa's Ice Shell
+This work is contained within europa_eutectic/
 
+
+The data pipeline for this project was as follows:
 1. Simulations with a 2D spherical annulus geometry are run until they reach a true or quasi steady-state, determined by RMS Velocity
    
 2. Simulations are read into the **src**/gaia_sim.py class, which performs 
@@ -55,9 +61,9 @@ The examples within this repository include the following works:
    3. calculates the depths that you reach 100 dB of attenuation (using either low or high loss model)
    4. Eutectic interface detection (lateral detectability %) is then calcualted for each pair of eutectic interface and attenuation model 
    
-3. Calculated fields and assocaited metadata is saved into a .json object
+3. Calculated fields and assocaited metadata is saved into a **data**/shell_visc*/*.json object
 
-4. Calculations relevant to figure generation are stored in tabular format (*full_study.csv)
+4. Calculations relevant to figure generation are stored in tabular format (**data**/*full_study.csv)
 
 5. .csv data is read in by figure[1-5]*.ipynb notebooks to generate figure components
 
