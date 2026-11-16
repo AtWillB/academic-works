@@ -27,7 +27,7 @@ Where the **abstract**/ folder contains all abstracts related to the highest-imp
 
 The examples within this repository include the following works:
 ## Modeling the Thermal Effects of Surface Regolith on Enceladus's Ice Shell
-This work is contained within enceladus_regolith/
+This work is contained within [enceladus_regolith/](https://github.com/AtWillB/academic-works/tree/master/enceladus_regolith)
 
 The data pipeline for this project was as follows:
 1. 1D temperature profiles of Enceladus's ice shell generated with varying ice shell depths, regolith depths, and regolith thermal conductivity by **src**/conductive_profile_equations.py/calc_ConductiveTempProfileVarkT.py
