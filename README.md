@@ -49,7 +49,7 @@ The data pipeline for this project was as follows:
 - Under each data/figure*/ sub-folder, there is a unique figure*_README.txt documenting the tablular structure used for both attenuation calculations and temperature profiles. 
 
 ## Assessing the Lateral Detectability of Eutectic Interfaces within Europa's Ice Shell
-This work is contained within europa_eutectic/
+This work is contained within [europa_eutectic/](https://github.com/AtWillB/academic-works/tree/master/europa_eutectics)
 
 
 The data pipeline for this project was as follows:
